@@ -56,7 +56,7 @@ class PhishingDetector:
 
     def check_url(self, url: str) -> DetectionResult:
         rule_result = rule_score_url(url)
-        ml_prob = self._model.predict_proba(url) if self.use_ml else None
+        ml_prob = self._model.predict_proba(url) if self._model is not None else None
         final_score = self._blend(rule_result["score"], ml_prob)
 
         return DetectionResult(
@@ -73,7 +73,7 @@ class PhishingDetector:
         rule_result = rule_email = rule_score_email(email_data)
 
         ml_prob = None
-        if self.use_ml:
+        if self._model is not None:
             urls = rule_result["features"].get("urls", [])
             if urls:
                 probs = [self._model.predict_proba(u) for u in urls]

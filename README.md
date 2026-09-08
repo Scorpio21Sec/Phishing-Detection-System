@@ -92,7 +92,14 @@ python cli.py train
 
 # Run the built-in demo over sample URLs/emails
 python cli.py demo
+
+# Start the local browser dashboard
+python dashboard.py
 ```
+
+Open `http://127.0.0.1:8000` after starting the dashboard. It provides URL and
+email checks backed by the same detector API as the CLI. The dashboard is
+local-only and uses Python's standard library, so no web framework is needed.
 
 ### As a library
 
